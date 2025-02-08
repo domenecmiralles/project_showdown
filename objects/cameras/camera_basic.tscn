@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://dra588632q0ei"]
+
+[ext_resource type="Shader" uid="uid://dy2qp4ywq1rp5" path="res://shaders/psx_camera_shader.gdshader" id="1_ljhdu"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ynswa"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dvny0"]
+render_priority = 0
+shader = ExtResource("1_ljhdu")
+shader_parameter/enable_fog = true
+shader_parameter/fog_color = Color(0.407331, 0.495938, 0.521854, 1)
+shader_parameter/noise_color = Color(0.523819, 0.237027, 0.169367, 1)
+shader_parameter/fog_distance = 100.0
+shader_parameter/fog_fade_range = 50.0
+shader_parameter/enable_noise = true
+shader_parameter/noise_time_fac = 2.63
+shader_parameter/enable_color_limitation = true
+shader_parameter/color_levels = 32
+shader_parameter/enable_dithering = true
+shader_parameter/dither_strength = 0.3
+
+[node name="Camera3D" type="Camera3D"]
+projection = 1
+size = 10.0
+near = 0.001
+
+[node name="PSXShader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0.142941, 0.0519524, -0.262691)
+visible = false
+mesh = SubResource("QuadMesh_ynswa")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_dvny0")

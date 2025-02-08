@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv1e0lpamj4uc"]
+
+[ext_resource type="Script" uid="uid://d3yqutvbxlci0" path="res://scripts/cameras/camera_setup.gd" id="1_ke48d"]
+[ext_resource type="PackedScene" uid="uid://dra588632q0ei" path="res://objects/cameras/camera_basic.tscn" id="2_7iq11"]
+
+[node name="Camera3D" type="Node3D" node_paths=PackedStringArray("cam_area", "camera") groups=["Camera"]]
+script = ExtResource("1_ke48d")
+cam_area = NodePath("Area3D")
+camera = NodePath("Camera3D")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+
+[node name="Camera3D" parent="." instance=ExtResource("2_7iq11")]
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
